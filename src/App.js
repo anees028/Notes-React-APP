@@ -28,9 +28,19 @@ const initialNotes = [
 const App = () => {
   const [notes, setNotes] = useState(initialNotes);
 
+  const addNote = (text) => {
+    const newNote = {
+      id: nanoid(),
+      text: text,
+      date: new Date().toLocaleDateString(),
+    };
+    const updatedNotes = [...notes, newNote];
+    setNotes(updatedNotes);
+  };
+
   return (
     <div className="container">
-      <NotesList notes={notes} />
+      <NotesList notes={notes} handleAddNote={addNote} />
     </div>
   );
 };

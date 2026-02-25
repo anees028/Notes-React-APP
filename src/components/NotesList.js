@@ -1,14 +1,19 @@
-import Note from "./Note"
+import AddNote from "./AddNotes";
+import Note from "./Note";
 
-const NotesList = ({notes}) => {
+const NotesList = ({ notes, handleAddNote }) => {
+  const handleSave = (noteText) => {
+    handleAddNote(noteText);
+  };
+
   return (
     <div className="notes-list">
-        {notes.map(note => (
-          <Note key={note.id} id={note.id} text={note.text} date={note.date} />
-        ))}
-
+      {notes.map((note) => (
+        <Note key={note.id} id={note.id} text={note.text} date={note.date} />
+      ))}
+      <AddNote handleAddNote={handleSave} />
     </div>
-  )
-}
+  );
+};
 
-export default NotesList
+export default NotesList;
