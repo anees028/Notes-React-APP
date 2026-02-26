@@ -6,7 +6,7 @@ const Header = ({ handleToogleDarkMode }) => {
         className="save"
         onClick={() => handleToogleDarkMode((prevDarkMode) => !prevDarkMode)}
       >
-        Toogle Mode
+        Toogle Theme
       </button>
     </div>
   );

@@ -1,44 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import NotesList from "./components/NotesList";
 import Search from "./components/Search";
 import Header from "./components/Header";
 
-const initialNotes = [
-  {
-    id: nanoid(),
-    text: "This is my first note!",
-    date: "2024-01-01",
-  },
-  {
-    id: nanoid(),
-    text: "This is my Second note!",
-    date: "2024-01-01",
-  },
-  {
-    id: nanoid(),
-    text: "This is my third note!",
-    date: "2024-01-01",
-  },
-  {
-    id: nanoid(),
-    text: "This is my fourth note!",
-    date: "2024-01-01",
-  },
-];
-
 const App = () => {
-  const [notes, setNotes] = useState(initialNotes);
+  const [notes, setNotes] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem("react-notes-app-data"));
+      return saved.reverse() || [];
+    } catch (err) {
+      return [];
+    }
+  });
 
   const [searchText, setSearchText] = useState("");
 
   const [darkMode, setDarkMode] = useState(false);
+
+  // Persist notes to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem("react-notes-app-data", JSON.stringify(notes));
+    } catch (err) {
+      alert("Failed to save notes. Please try again.");
+    }
+  }, [notes]);
 
   const addNote = (text) => {
     const newNote = {
       id: nanoid(),
       text: text,
       date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString(),
     };
     const updatedNotes = [...notes, newNote];
     setNotes(updatedNotes);

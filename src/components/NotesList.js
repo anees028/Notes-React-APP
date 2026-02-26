@@ -9,7 +9,7 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
   return (
     <div className="notes-list">
       {notes.map((note) => (
-        <Note key={note.id} id={note.id} text={note.text} date={note.date} handleDeleteNote={handleDeleteNote} />
+        <Note key={note.id} id={note.id} text={note.text} date={note.date} time={note.time} handleDeleteNote={handleDeleteNote} />
       ))}
       <AddNote handleAddNote={handleSave} />
     </div>
