@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import NotesList from "./components/NotesList";
 import Search from "./components/Search";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [notes, setNotes] = useState(() => {
@@ -46,17 +47,20 @@ const App = () => {
   return (
     <div className={`${darkMode && "dark-mode"}`}>
       <div className="container">
-        <Header handleToogleDarkMode={setDarkMode} />
-        <Search handleSearchNote={setSearchText} />
-        <NotesList
-          notes={notes.filter((note) =>
-            note.text
-              .toLocaleLowerCase()
-              .includes(searchText.toLocaleLowerCase()),
-          )}
-          handleAddNote={addNote}
-          handleDeleteNote={deleteNote}
-        />
+        <div className="content">
+          <Header handleToogleDarkMode={setDarkMode} />
+          <Search handleSearchNote={setSearchText} />
+          <NotesList
+            notes={notes.filter((note) =>
+              note.text
+                .toLocaleLowerCase()
+                .includes(searchText.toLocaleLowerCase()),
+            )}
+            handleAddNote={addNote}
+            handleDeleteNote={deleteNote}
+          />
+        </div>
+        <Footer />
       </div>
     </div>
   );
